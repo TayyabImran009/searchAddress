@@ -1,0 +1,121 @@
+{% extends "base.html" %}
+
+{% load static %}
+
+{% block title %} Home {% endblock %} 
+
+{% block stylesheets %}
+
+    <link rel="stylesheet" href="{% static 'css/home.css' %}" />
+
+{% endblock stylesheets %}
+
+{% block content %}	
+
+    <!-- [ Main Content ] start -->
+    <div class="pcoded-main-container">
+        <div class="pcoded-content">
+            <div class="row">
+                <div class="col-md-12" style="padding:20px">
+                    <form method="POST">
+                        {% csrf_token %}
+                        <div style="display:flex;">
+                            <div class="form-group" style="width: 50%; margin-right: 10px;">
+                                <label>First Name</label>
+                                <input type="text" class="form-control" placeholder="Enter first name" name="fname">
+                            </div>
+                            <div class="form-group" style="width: 50%;">
+                                <label>Last Name</label>
+                                <input type="text" class="form-control" placeholder="Enter last name" name="lname">
+                            </div>
+                        </div>
+
+                        <div style="display:flex;">
+                            <div class="form-group" style="width: 50%; margin-right: 10px;">
+                                <label>Address</label>
+                                <input type="text" class="form-control" placeholder="Enter address" name="address" required>
+                            </div>
+                            <div class="form-group" style="width: 50%;">
+                                <label>City</label>
+                                <input type="text" class="form-control" placeholder="Enter city" name="city" required>
+                            </div>
+                        </div>
+
+                        <div style="display:flex;">
+                            <div class="form-group" style="width: 50%; margin-right: 10px;">
+                                <label>State</label>
+                                <input type="text" class="form-control" placeholder="Enter state" name="state" required>
+                            </div>
+                            <div class="form-group" style="width: 50%;">
+                                <label>Zip</label>
+                                <input type="number" class="form-control" placeholder="Enter zip" name="zip" required>
+                            </div>
+                        </div>
+                        <div style="display:flex;">
+                            <div class="form-group" style="width: 50%; margin-right: 10px;">
+                                <div class="btn-group mb-2 mr-2">
+                                    <button type="button" class="btn  btn-info" id="tagLable">Tags</button>
+                                    <button type="button" class="btn  btn-info dropdown-toggle dropdown-toggle-split" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><span class="sr-only">Toggle Dropdown</span></button>
+                                    <div class="dropdown-menu">
+                                        <a class="dropdown-item" id="typeOption" style="cursor: pointer;">Hot</a>
+                                        <a class="dropdown-item" id="typeOption" style="cursor: pointer;">Warm</a>
+                                        <a class="dropdown-item" id="typeOption" style="cursor: pointer;">Cold</a>
+                                    </div>
+                                </div>
+                                <input type="text" id="typeSelected" name="type" style="display:none;" />
+                                <button type="submit" class="btn  btn-primary mb-2 mr-2">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <form method="POST" action="{% url 'fileUpload' %}" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <h1 style="text-align: center;">or</h1>
+                        <label>Upload csv file</label>
+                        <input type="file" id="myfile" name="dataFile">
+                        <br>
+                        <button type="submit" class="btn  btn-primary mb-2 mr-2">Upload</button>
+                    </form>
+                </div>
+                {% if addressObj %}
+                <div class="addressDiv">
+
+                    {% for detail in addressObj%}
+                    <div class="card">
+                        <div class="card-body" style="position: relative;">
+                            <h5 class="card-title">City: {{detail.city}}</h5>
+                            {% if detail.tag == "Hot" %}
+                                <label class="lable hot">{{detail.tag}}</label>
+                            {% elif detail.tag == "Warm" %}
+                                <label class="lable warm">{{detail.tag}}</label>
+                            {% else %}
+                                <label class="lable cold">{{detail.tag}}</label>
+                            {% endif %}
+                            <h6 class="card-subtitle mb-2 text-muted" style="margin-bottom: 16px !important;">State: {{detail.state}}</h6>
+                            <h6 class="card-subtitle mb-2 text-muted">Zip: {{detail.zip}}</h6>
+                            <p class="card-text">Address: {{detail.address}}</p>
+                            <a href="{% url 'details' detail.id %}" class="card-link">Get Details</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+                </div>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+    <!-- [ Main Content ] end -->
+
+{% endblock content %}
+
+<!-- Specific Page JS goes HERE  -->
+{% block javascripts %}
+
+    <!-- Apex Chart -->
+    <script src="/static/assets/js/plugins/apexcharts.min.js"></script>
+    <!-- custom-chart js -->
+    <script src="/static/assets/js/pages/dashboard-main.js"></script>
+
+    <script src="{% static 'js/home.js' %}"></script>"
+
+{% endblock javascripts %}

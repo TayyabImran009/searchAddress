@@ -1,0 +1,29 @@
+.addressDiv{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	width: 100%;
+	padding: 35px;
+}
+
+.lable{
+	position: absolute;
+	right: 47px;
+    color: white;
+    padding: 10px;
+    border-radius: 10px;
+    width: 65px;
+    text-align: center;
+}
+
+.hot{
+	background-color: red;
+}
+
+.warm{
+	background-color: rgba(255, 0, 119, 0.863);
+}
+
+.cold{
+	background-color: blue;
+}

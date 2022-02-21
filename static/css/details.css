@@ -1,0 +1,54 @@
+.notChkIcion{
+    margin-left: 10px;
+    font-size: large;
+    cursor: pointer;
+	color: black;
+}
+
+.cardArea{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.card{
+	width: 70%;
+	position: relative;
+}
+
+.checked{
+	color: blue;
+	margin-left: 10px;
+    font-size: large;
+    cursor: pointer;
+}
+
+.phoneTagsDiv{
+	position:absolute;
+	color: blue;
+	margin-left: 10px;
+    font-size: large;
+    cursor: pointer;
+	display: flex;
+	right: 30px;
+    top: 45%;
+}
+
+.phoneTagsDiv>label{
+	margin-left: 10px;
+}
+
+.tagsDiv{
+	display:flex;
+	position: absolute;
+	right: 10px;
+	top: 45%;
+}
+
+.tagsDiv > p{
+	margin-right: 10px;
+	background: aqua;
+    padding: 8px;
+    color: white;
+    border-radius: 20px;
+}
